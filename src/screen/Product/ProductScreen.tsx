@@ -2,11 +2,19 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import Products from "../../component/Product/Products";
 
-function ProductScreen(): React.JSX.Element {
+type Props = {
+    route: any
+};
+
+const ProductScreen: React.FC<Props> = ({ route }) => {
+
+    const { categoryId } = route.params;
+
+    console.log("categoryId", categoryId);
 
     return (
         <View style={styles.container}>
-            <Products />
+            <Products categoryId={categoryId} />
         </View>
     );
 }

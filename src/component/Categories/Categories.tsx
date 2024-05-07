@@ -37,7 +37,10 @@ const Categories = () => {
     <View>
       <View style={styles.container}>
         <Text style={styles.fontsty}>Our Services</Text>
-        <Text style={styles.viewAll} onPress={() => navigation.navigate('ProductScreen')}>View all</Text>
+        <Text style={styles.viewAll}
+          onPress={() => navigation.navigate('ProductScreen', { categoryId: null })}>
+          View all
+        </Text>
       </View>
 
       <View >

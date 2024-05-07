@@ -1,20 +1,20 @@
 import * as React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
-import { getproductlist } from '../../api/Product/productApi';
+import { getproductlist, getproductlistByCategory } from '../../api/Product/productApi';
 import { useNavigation } from '@react-navigation/native';
 import ProductItem from './ProductItem';
 
 
-const Products = () => {
+const Products = ({ categoryId }) => {
   const navigation = useNavigation<any>();
 
   const [productData, setProductData] = React.useState(null);
   const [categoriesData, setCategoriesData] = React.useState(null);
 
   React.useEffect(() => {
-    fetchProductList();
-  }, []);
+    categoryId ? fetchProductlistByCategory() : fetchProductList();
+  }, [categoryId]);
 
   const fetchProductList = async () => {
     try {
@@ -23,6 +23,18 @@ const Products = () => {
 
       setProductData(res?.data?.lstProductSearch);
       setCategoriesData(res?.data?.lstCategories)
+    } catch (err) {
+      console.log('error fetchProductList : ', err);
+    }
+  }
+
+  const fetchProductlistByCategory = async () => {
+    try {
+      const res = await getproductlistByCategory(categoryId);
+      //  console.log("fetchProductList", res?.data.lstProductSearch);
+
+      setProductData(res?.data?.lstProductSearch);
+      // setCategoriesData(res?.data?.lstCategories)
     } catch (err) {
       console.log('error fetchProductList : ', err);
     }

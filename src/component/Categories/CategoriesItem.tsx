@@ -1,6 +1,7 @@
 import React from "react";
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { palette } from "../../theme/palette";
+import { useNavigation } from "@react-navigation/native";
 
 // Gap stuff
 const { width } = Dimensions.get('window');
@@ -12,9 +13,10 @@ const childWidth = (windowWidth - totalGapSize) / itemPerRow;
 
 
 const CategoriesItem: React.FC<any> = ({ category }) => {
+    const navigation = useNavigation<any>();
 
     const goProdScreenHandler = () => {
-
+        navigation.navigate('ProductScreen', { categoryId: category.categoryId })
     }
 
     return (
