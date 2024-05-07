@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   listContents: {
     //alignItems: 'center',
     //  width: '100%',
-    paddingBottom: 550,
+    paddingBottom: 150,
   },
 
 
