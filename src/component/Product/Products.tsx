@@ -1,0 +1,87 @@
+import * as React from 'react';
+import { FlatList, StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
+import { getproductlist } from '../../api/Product/productApi';
+import { useNavigation } from '@react-navigation/native';
+import ProductItem from './ProductItem';
+
+
+const Products = () => {
+  const navigation = useNavigation<any>();
+
+  const [productData, setProductData] = React.useState(null);
+  const [categoriesData, setCategoriesData] = React.useState(null);
+
+  React.useEffect(() => {
+    fetchProductList();
+  }, []);
+
+  const fetchProductList = async () => {
+    try {
+      const res = await getproductlist();
+      //   console.log("fetchProductList", res?.data.lstProductSearch);
+
+      setProductData(res?.data?.lstProductSearch);
+      setCategoriesData(res?.data?.lstCategories)
+    } catch (err) {
+      console.log('error fetchProductList : ', err);
+    }
+  }
+
+
+  return (
+    <View>
+      <View style={styles.container}>
+        <Text style={styles.fontsty}>Our Services</Text>
+      </View>
+
+      <View >
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item, index) => index.toString()}
+          data={productData}
+          renderItem={({ item }) =>
+            <ProductItem
+              item={item}
+            />
+          }
+          // refreshControl={
+          //     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          // }
+          // ListEmptyComponent={EmptyDataPromo}
+          style={styles.list}
+          contentContainerStyle={styles.listContents}
+        />
+      </View>
+
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+    marginTop: 10
+  },
+  fontsty: {
+    fontSize: 18,
+    fontWeight: 700,
+    flexWrap: 'wrap'
+  },
+  list: {
+    //   paddingTop: 15,
+    width: '100%',
+  },
+  listContents: {
+    //alignItems: 'center',
+    //  width: '100%',
+    paddingBottom: 550,
+  },
+
+
+});
+
+export default Products;
