@@ -1,15 +1,13 @@
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { useEffect } from "react";
-import { View } from "react-native";
-import { Text } from "react-native-paper";
+import React from "react";
 import { RenderTabNavigation } from "./TabNavigator";
-import HomeScreen from "../screen/Home/HomeScreen";
 import TransactionScreen from "../screen/Transaction/TransactionScreen";
 import LoginScreen from "../screen/Auth/LoginScreen";
 import ProductScreen from "../screen/Product/ProductScreen";
 import CartScreen from "../screen/Cart/CartScreen";
 import SalesExecutiveScreen from "../screen/SalesExecutive/SalesExecutiveScreen";
+import OrderScreen from "../screen/Transaction/OrderScreen";
 
 
 const Stack = createStackNavigator();
@@ -58,6 +56,11 @@ const StackNavigator = () => {
                 <Stack.Screen
                     name={"ProductScreen"}
                     component={ProductScreen}
+                />
+
+                <Stack.Screen
+                    name={"OrderScreen"}
+                    component={OrderScreen}
                 />
 
             </Stack.Navigator>

@@ -1,5 +1,4 @@
 import { STORE_ID } from "../../util/constData";
-import { getCustomerID } from "../../util/constFunctions";
 import instance from "../apiInstance";
 
 export const getSalesexecutive = async () => {

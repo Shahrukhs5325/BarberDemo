@@ -38,8 +38,8 @@ const ProductItem: React.FC<any> = ({ item }) => {
                         /> : null}
                     <View style={{ width: "80%" }}>
                         <Text style={styles.txtName} numberOfLines={2}>{item.productName}</Text>
-                        <Text style={styles.txtUnit} numberOfLines={1}>category</Text>
-                        <Text style={styles.txtUnit} numberOfLines={1}>{item.sellingPrice + "/" + item.unitName}</Text>
+                        {/* <Text style={styles.txtUnit} numberOfLines={1}>category</Text> */}
+                        <Text style={styles.txtUnit} numberOfLines={1}>{"SAR " + item.sellingPrice}</Text>
 
                     </View>
                     <View style={{ width: 24 }}>

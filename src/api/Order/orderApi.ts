@@ -6,8 +6,8 @@ export const upsertBBCustomerOrder = async (payload: any) => {
     return response;
 };
 
-export const allCustomerOrdersByCustomerId = async (id: any) => {
-    const response = await instance.post(`customerflow/web/allCustomerOrdersByCustomerId?customerId=${id}&orderStatus=pending`);
+export const allCustomerOrdersByCustomerId = async (id: any,type:string) => {    
+    const response = await instance.get(`customerflow/allCustomerOrdersByCustomerIdwithName?customerId=${id}&orderStatus=${type}`);
     return response;
 };
 
