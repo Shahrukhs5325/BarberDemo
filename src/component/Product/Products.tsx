@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
-import { Text } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 import { getproductlist, getproductlistByCategory } from '../../api/Product/productApi';
 import { useNavigation } from '@react-navigation/native';
 import ProductItem from './ProductItem';
 import { UserContext } from '../../context/user/UserContext';
+import { palette } from '../../theme/palette';
 
 
 const Products = ({ categoryId }) => {
@@ -61,13 +62,18 @@ const Products = ({ categoryId }) => {
         style={styles.list}
         contentContainerStyle={styles.listContents}
       />
-
+      {userContext.cart && userContext.cart.length > 0 ?
+        <Button mode="contained" style={styles.btn}
+          onPress={() => navigation.navigate('CartScreen')}>
+          Cart
+        </Button> : null}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     marginHorizontal: 14
   },
   fontsty: {
@@ -83,6 +89,12 @@ const styles = StyleSheet.create({
     //alignItems: 'center',
     //  width: '100%',
     paddingBottom: 150,
+  },
+  btn: {
+    width: '100%',
+    backgroundColor: palette.primaryDark,
+    borderRadius: 6,
+    marginVertical: 10
   },
 
 

@@ -176,7 +176,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
             const res = await upsertBBCustomerOrder(postData);
 
             console.log("upsertBBCustomerOrder", res.data);
-            showSnackbar("Appointment book successfully","success");
+            showSnackbar("Appointment book successfully", "success");
             navigation.dispatch(StackActions.replace("TransactionScreen"));
             setIsLoading(false);
         } catch (err) {
@@ -228,7 +228,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
                     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                         <View style={styles.chipContainer}>
                             {APP_TIME.map((item, i) => (
-                                <Chip style={userContext.appTime && userContext.appTime === item ? styles.selChip : styles.chip} onPress={() => selectSalesExHAndler(item)} key={i} >{item}</Chip>
+                                <Chip style={userContext.appTime && userContext.appTime === item ? styles.selChip : styles.chip} selectedColor="#FFF" onPress={() => selectSalesExHAndler(item)} key={i} >{item}</Chip>
                             ))}
                         </View>
                     </ScrollView>
@@ -250,7 +250,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
                     <Button mode="contained" style={styles.btn}
                         loading={isLoading}
                         onPress={() => submit()}>
-                        Book
+                        Book Appointment
                     </Button>
                 </View>
 
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     },
     selChip: {
         width: 90,
-        backgroundColor: palette.primaryDark
+        backgroundColor: palette.primaryDark,
     },
     secContainer: {
         marginHorizontal: 14,

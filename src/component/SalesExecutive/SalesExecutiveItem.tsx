@@ -39,7 +39,7 @@ const SalesExecutiveItem: React.FC<any> = ({ item }) => {
                                 style={styles.img}
                             />}
                     </View>
-                    <Text style={styles.txt} numberOfLines={2}>{item.name}</Text>
+                    <Text style={userContext.salesEx && userContext.salesEx.id === item.id ? styles.selectTxt : styles.txt} numberOfLines={2}>{item.name}</Text>
 
                 </View>
             </TouchableOpacity>
@@ -53,6 +53,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         flexWrap: "wrap",
         // height: 30,
+    },
+    selectTxt: {
+        fontSize: 12,
+        textAlign: 'center',
+        flexWrap: "wrap",
+        color: '#FFF'
     },
     img: {
         width: 60,
@@ -84,7 +90,7 @@ const styles = StyleSheet.create({
         minWidth: 90,
         width: 90,
         maxHeight: 110,
-        height: 110,
+        height: 100,
         backgroundColor: palette.grayLight,
         borderRadius: 8,
     },
@@ -94,8 +100,8 @@ const styles = StyleSheet.create({
         marginHorizontal: gap / 2,
         minWidth: 90,
         width: 90,
-        maxHeight: 110,
-        height: 110,
+        maxHeight: 100,
+        height: 100,
         backgroundColor: palette.primaryDark,
         borderRadius: 8,
 
