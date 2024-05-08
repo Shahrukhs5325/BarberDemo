@@ -7,9 +7,11 @@ import { palette } from "../../theme/palette";
 import { useNavigation } from "@react-navigation/native";
 import SalesExecutiveItem from "../../component/SalesExecutive/SalesExecutiveItem";
 import ReactNativeCalendarStrip from "react-native-calendar-strip";
-import { APP_TIME } from "../../util/constData";
+import { APP_TIME, STORE_ID, STORE_NAME, USER_ID, USER_NAME } from "../../util/constData";
 import { UserContext } from "../../context/user/UserContext";
 import moment from "moment";
+import { getUTCDate } from "../../util/constFunctions";
+import { upsertBBCustomerOrder } from "../../api/Order/orderApi";
 
 type Props = {
 
@@ -22,7 +24,11 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
     const [salesExecutiveData, setSalesExecutiveData] = React.useState(null);
     const [isSelected, setIsSelected] = React.useState(false);
     const [date, setDate] = React.useState(moment());
-
+    const [errors, setErrors] = React.useState({
+        appDate: "",
+        appTime: "",
+        salesexecutive: ""
+    });
 
 
 
@@ -33,8 +39,6 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
     const fetchSalesExecutive = async () => {
         try {
             const res = await getSalesexecutive();
-            console.log("fetchSalesExecutive", res?.data);
-
             setSalesExecutiveData(res?.data);
         } catch (err) {
             console.log('error fetchSalesExecutive : ', err);
@@ -49,6 +53,126 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
     const onDateSelected = (d: any) => {
         setDate(d.format('YYYY-MM-DD'))
         userContext.setAppDate(d.format('YYYY-MM-DD'));
+    }
+
+
+    const submit = async() => {
+        if (!userContext.salesEx) {
+            setErrors({ ...errors, salesexecutive: "Select hair specialist " });
+            return false;
+        } else if (!userContext.appDate) {
+            setErrors({ ...errors, appDate: "Select appointment date" });
+            return false;
+        } else if (!userContext.appTime) {
+            setErrors({ ...errors, appTime: "Select appointment slot" });
+            return false;
+        }
+
+        const custAddress = userContext.user.length && userContext.user[0]
+
+        const orderStatusObj = [{
+            "comments": "",
+            "created_at": "",
+            "customerId": userContext.customerId,
+            "statusId": "1",
+            "stausName": "Pending",
+            "userName": USER_ID,
+        }];
+
+        let orderDetails: { numbers: any; cart: any; cartPrice: any; categoryId: any; inventoryManage: any; brandId: any; productId: any; subCategoryId: any; sellingPrice: any; quantity: any; priceIncludeTax: any; notes: any; storeId: any; productName: any; taxes: any; discounts: any; unitName: any; isMeasurable: any; imageId: any; imageUrl: any; itemDiscount: any; itemTax: any; orderQuantity: string; stock: number; }[] = []
+
+        let grandTotal = 0;
+        userContext.cart && userContext.cart.map((item) => {
+            orderDetails.push({
+                numbers: item.numbers,
+                cart: item.cart,
+                cartPrice: item.cartPrice,
+                categoryId: item.categoryId,
+                inventoryManage: item.inventoryManage,
+                brandId: item.brandId,
+                productId: item.productId,
+                subCategoryId: item.subCategoryId,
+                sellingPrice: item.sellingPrice,
+                quantity: item.quantity,
+                priceIncludeTax: item.priceIncludeTax,
+                notes: item.notes,
+                storeId: item.storeId,
+                productName: item.productName,
+                taxes: item.taxes,
+                discounts: item.discounts,
+                unitName: item.unitName,
+                isMeasurable: item.isMeasurable,
+                imageId: item.imageId,
+                imageUrl: item.imageUrl,
+                itemDiscount: item.discounts,
+                itemTax: item.taxes,
+                orderQuantity: "1",
+                stock: 1,
+            });
+            grandTotal = item.sellingPrice + grandTotal
+        })
+
+        var postData = {
+            salesExecutiveId:userContext.salesEx.id,
+            salesExecutiveName: userContext.salesEx.name,
+            sales_executiveId: userContext.salesEx.id,
+            appointmentDateTime: userContext.appDate,
+            // appointmentSlot: "string",
+            presImgFlag: false,
+            storeId: STORE_ID,
+            saleDate: moment(new Date()).format('YYYY-MM-DD'),
+            address: '',
+            city: custAddress.city ? custAddress.city : "",
+            clientLastUpdated: 0,
+            country: custAddress.country ? custAddress.country : "",
+            created_at: "",
+            currencyName: "SAR",
+            customerId: userContext.customerId,
+            dateReport: "2020-06-07T07:46:24.924Z",
+            deliveryDate: "2020-06-10",
+            discount: 0,
+            email: '',
+            finaltotalAmount: grandTotal,
+            lastUpdate: getUTCDate(),
+            modeofpayment: "Cash",
+            notes: "",
+            orderId: 0,
+            orderType: "Online",
+            paymentType: "Cash",
+            pinCode: custAddress.pinCode ? custAddress.pinCode : "",
+            promoCodeId: 0,
+            scheduleDeliveryTime: "2020-06-10",
+            sentNotification: 0,
+            state: custAddress.state ? custAddress.state : "",
+            status: "Pending",
+            storeName: STORE_NAME,
+            totalBalance: 0,
+            totalPayment: 0,
+            typeName: "Type",
+            updatedBy: "ABC",
+            orderNo: 0,
+            userName: USER_ID,
+            phone: "+" + userContext.customerId,
+            name: "Customer ABC",
+            deliveryAddress: "",
+            latitude: 24.7136,
+            longitude: 46.6753,
+            orderStatus: orderStatusObj,
+            orderTime: '' + getUTCDate(),
+            totalAmount: grandTotal,
+            orderDetails: orderDetails,
+            comments: "",
+            homeDelivery: false
+        }
+
+        try {
+            const res = await upsertBBCustomerOrder(postData);
+            
+            console.log("upsertBBCustomerOrder",res.data);
+            
+        } catch (err) {
+            console.log('error fetchSalesExecutive : ', err);
+        }
     }
 
 
@@ -99,7 +223,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
                         </View>
                     </ScrollView>
                     <Button mode="contained" style={styles.btn}
-                        onPress={() => setIsSelected(true)}>
+                        onPress={() => submit()}>
                         Book
                     </Button>
                 </View>

@@ -1,5 +1,6 @@
 import Snackbar from "react-native-snackbar";
 import { palette } from "../theme/palette";
+import { Auth } from "aws-amplify";
 
 export const showSnackbar = async (text: string, type: string) => {
     Snackbar.show({
@@ -8,6 +9,49 @@ export const showSnackbar = async (text: string, type: string) => {
         backgroundColor: type === 'error' ? palette.danger : palette.primaryDark,
     });
 };
+
+export function getUTCDate() {
+    var d = new Date();
+    return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds(), d.getUTCMilliseconds())
+}
+
+//Add product to cart
+export const addProductToCart = (prodObj: any) => {
+    let orderDetails = {
+        numbers: prodObj.numbers,
+        cart: prodObj.cart,
+        cartPrice: prodObj.cartPrice,
+        categoryId: prodObj.categoryId,
+        inventoryManage: prodObj.inventoryManage,
+        brandId: prodObj.brandId,
+        productId: prodObj.productId,
+        subCategoryId: prodObj.subCategoryId,
+        sellingPrice: prodObj.sellingPrice,
+        quantity: prodObj.quantity,
+        priceIncludeTax: prodObj.priceIncludeTax,
+        notes: prodObj.notes,
+        storeId: prodObj.storeId,
+        productName: prodObj.productName,
+        taxes: prodObj.taxes,
+        discounts: prodObj.discounts,
+        unitName: prodObj.unitName,
+        isMeasurable: prodObj.isMeasurable,
+        imageId: prodObj.imageId,
+        imageUrl: prodObj.imageUrl,
+        itemDiscount: prodObj.discounts,
+        itemTax: prodObj.taxes,
+        orderQuantity: "1",
+        stock: 1,
+    };
+
+    let cartObj = {
+        productId: prodObj.productId,
+        productName: prodObj.productName,
+        prodQuantity: "1",
+        prodObj: orderDetails,
+    }
+    return cartObj
+}
 
 
 export const handleCognitoError = (error: any) => {
