@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Products from "../../component/Product/Products";
 import { UserContext } from "../../context/user/UserContext";
 import { palette } from "../../theme/palette";
@@ -46,7 +46,10 @@ const CartScreen: React.FC<Props> = ({ }) => {
                     </Button>
                 </View> :
                 <View style={styles.containerErr}>
-                    <Text style={styles.emtCartTxt}>Empty cart</Text>
+                    <Text style={styles.emtCartTxt}>Empty Cart</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('ProductScreen', { categoryId: null })}>
+                        <Text style={styles.shopTxt}>Book Services</Text>
+                    </TouchableOpacity>
                 </View>}
         </>
     );
@@ -60,12 +63,18 @@ const styles = StyleSheet.create({
     containerErr: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        gap: 16
     },
     emtCartTxt: {
         fontSize: 16,
         fontWeight: "700",
         color: palette.black
+    },
+    shopTxt: {
+        fontSize: 16,
+        color: palette.primaryLight,
+        textDecorationLine: "underline"
     },
     list: {
         //   paddingTop: 15,
