@@ -21,8 +21,9 @@ const ProductItem: React.FC<any> = ({ item }) => {
     }
 
     const removeProdHandler = () => {
-
-
+        const arr = [...userContext.cart]
+        const arr1 = arr.filter(p => p.productId !== item.productId)
+        userContext.setCart(arr1);
     }
 
 

@@ -21,7 +21,7 @@ const CartScreen: React.FC<Props> = ({ }) => {
         <>
             <Topbar title="Cart" isIconHide={true} />
 
-            {userContext.cart ?
+            {userContext.cart.length > 0 ?
                 <View style={styles.container}>
                     <FlatList
                         showsVerticalScrollIndicator={false}

@@ -10,11 +10,9 @@ const OrderItem: React.FC<any> = ({ item }) => {
   return (
     <>
       <View style={styles.container}>
-        <Text style={styles.txtName} numberOfLines={1}>Order ID: {item.orderId}</Text>
-        <Text style={styles.txtName} numberOfLines={1}>Store Name: {item.storeName}</Text>
         <Text style={styles.txtName} numberOfLines={1}>Hair Specialist: {item.salesExecutiveName}</Text>
-        <Text style={styles.txtName} numberOfLines={1}>Slot Date: {item.appointmentDateTime}</Text>
-        <Text style={styles.txtName} numberOfLines={1}>Slot Time: {item.appointmentSlot}</Text>
+        <Text style={styles.txtName} numberOfLines={1}>Appointment Date: {item.appointmentDateTime}</Text>
+        <Text style={styles.txtName} numberOfLines={1}>Appointment Time: {item.appointmentSlot}</Text>
         <Text style={styles.txtName} numberOfLines={1}>Status: {item.status}</Text>
       </View>
     </ >
