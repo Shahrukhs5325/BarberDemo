@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         flexWrap: "wrap",
         fontWeight: "600",
-        height: 32
+        height: 36
     },
     txtUnit: {
         fontSize: 14,

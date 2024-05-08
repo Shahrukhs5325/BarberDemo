@@ -1,6 +1,7 @@
 import Snackbar from "react-native-snackbar";
 import { palette } from "../theme/palette";
-import { Auth } from "aws-amplify";
+import { Linking, Platform } from "react-native";
+import { STORE_NAME } from "./constData";
 
 export const showSnackbar = async (text: string, type: string) => {
     Snackbar.show({
@@ -14,6 +15,20 @@ export function getUTCDate() {
     var d = new Date();
     return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds(), d.getUTCMilliseconds())
 }
+
+export const openAddressOnMap = () => {
+    const scheme = Platform.select({
+        ios: 'maps:0,0?q=',
+        android: 'geo:0,0?q=',
+    });
+    const latLng = `${24.7136},${46.6753}`;
+    const label = STORE_NAME;
+    const url = Platform.select({
+        ios: `${scheme}${label}@${latLng}`,
+        android: `${scheme}${latLng}(${label})`,
+    });
+    Linking.openURL(url);
+};
 
 //Add product to cart
 export const addProductToCart = (prodObj: any) => {

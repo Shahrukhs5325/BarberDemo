@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { palette } from "../../theme/palette";
+import { openAddressOnMap } from "../../util/constFunctions";
 
 
 
@@ -10,10 +11,20 @@ const OrderItem: React.FC<any> = ({ item }) => {
   return (
     <>
       <View style={styles.container}>
-        <Text style={styles.txtName} numberOfLines={1}>Hair Specialist: {item.salesExecutiveName}</Text>
-        <Text style={styles.txtName} numberOfLines={1}>Appointment Date: {item.appointmentDateTime}</Text>
-        <Text style={styles.txtName} numberOfLines={1}>Appointment Time: {item.appointmentSlot}</Text>
-        <Text style={styles.txtName} numberOfLines={1}>Status: {item.status}</Text>
+        <View>
+          <Text style={styles.txtName} numberOfLines={1}>Hair Specialist: {item.salesExecutiveName}</Text>
+          <Text style={styles.txtName} numberOfLines={1}>Appointment Date: {item.appointmentDateTime}</Text>
+          <Text style={styles.txtName} numberOfLines={1}>Appointment Time: {item.appointmentSlot}</Text>
+          <Text style={styles.txtName} numberOfLines={1}>Status: {item.status}</Text>
+        </View>
+        <View>
+          <TouchableOpacity onPress={() => openAddressOnMap()}>
+            <Image
+              style={styles.img}
+              source={require("../../assets/direction.png")}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     </ >
   );
@@ -27,8 +38,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginVertical: 6,
     padding: 10,
-
-    borderRadius: 8
+    borderRadius: 8,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   txtName: {
     fontSize: 14,
@@ -36,6 +49,10 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     // height: 32
   },
+  img: {
+    width: 26,
+    height: 26,
+  }
 
 });
 

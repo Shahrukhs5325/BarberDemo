@@ -29,8 +29,7 @@ const OrderScreen: React.FC<Props> = ({ route }) => {
     const fetchCustomerOrders = async () => {
         try {
             const res = await allCustomerOrdersByCustomerId(userContext.customerId, type === "pending" ? "pending" : "accepted");
-            console.log("fetchCustomerOrders", res?.data.orderList.length);
-
+ 
             setOrderData(res?.data.orderList);
         } catch (err) {
             console.log('error fetchCustomerOrders : ', err);
