@@ -1,13 +1,42 @@
+import { NavigationContainer } from "@react-navigation/native";
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import Topbar from "../../component/TopBar/Topbar";
+
+
+function HomeScreen() {
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>Home!</Text>
+        </View>
+    );
+}
+
+function SettingsScreen() {
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>Settings!</Text>
+        </View>
+    );
+}
+
+
+const Tab = createMaterialTopTabNavigator();
+
 
 function TransactionScreen(): React.JSX.Element {
 
 
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>TransactionScreen!</Text>
-        </View>
+        <>
+            <Topbar title="Appointments" isIconHide={true} />
+            <Tab.Navigator>
+                <Tab.Screen name="Home" component={HomeScreen} />
+                <Tab.Screen name="Settings" component={SettingsScreen} />
+            </Tab.Navigator>
+        </>
+
     );
 }
 
