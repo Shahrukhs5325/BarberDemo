@@ -36,6 +36,10 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
         fetchSalesExecutive();
     }, []);
 
+    React.useEffect(() => {
+        setErrors({ ...errors, salesexecutive: "" });
+    }, [userContext.salesEx]);
+
     const fetchSalesExecutive = async () => {
         try {
             const res = await getSalesexecutive();
@@ -48,15 +52,17 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
 
     const selectSalesExHAndler = (item: string) => {
         userContext.setAppTime(item);
+        setErrors({ ...errors, appTime: "" });
     }
 
     const onDateSelected = (d: any) => {
         setDate(d.format('YYYY-MM-DD'))
         userContext.setAppDate(d.format('YYYY-MM-DD'));
+        setErrors({ ...errors, appDate: "" });
     }
 
 
-    const submit = async() => {
+    const submit = async () => {
         if (!userContext.salesEx) {
             setErrors({ ...errors, salesexecutive: "Select hair specialist " });
             return false;
@@ -113,7 +119,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
         })
 
         var postData = {
-            salesExecutiveId:userContext.salesEx.id,
+            salesExecutiveId: userContext.salesEx.id,
             salesExecutiveName: userContext.salesEx.name,
             sales_executiveId: userContext.salesEx.id,
             appointmentDateTime: userContext.appDate,
@@ -167,9 +173,9 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
 
         try {
             const res = await upsertBBCustomerOrder(postData);
-            
-            console.log("upsertBBCustomerOrder",res.data);
-            
+
+            console.log("upsertBBCustomerOrder", res.data);
+
         } catch (err) {
             console.log('error fetchSalesExecutive : ', err);
         }
@@ -222,6 +228,21 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
                             ))}
                         </View>
                     </ScrollView>
+
+
+                </View>
+
+                <View style={styles.secContainer}>
+
+                    {errors.salesexecutive ?
+                        <Text style={{ fontSize: 14, color: "red" }}>{errors.salesexecutive}</Text> :
+                        errors.appDate ?
+                            <Text style={{ fontSize: 14, color: "red" }}>{errors.appDate}</Text> :
+                            errors.appTime ?
+                                <Text style={{ fontSize: 14, color: "red" }}>{errors.appTime}</Text> : null}
+
+
+
                     <Button mode="contained" style={styles.btn}
                         onPress={() => submit()}>
                         Book
@@ -271,7 +292,7 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: palette.primaryDark,
         borderRadius: 6,
-        marginVertical: 26
+        marginVertical: 10
     },
 
 });
