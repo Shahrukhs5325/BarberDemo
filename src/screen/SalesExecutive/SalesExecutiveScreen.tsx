@@ -4,13 +4,13 @@ import Topbar from "../../component/TopBar/Topbar";
 import { getSalesexecutive } from "../../api/User/userApi";
 import { Button, Chip } from "react-native-paper";
 import { palette } from "../../theme/palette";
-import { useNavigation } from "@react-navigation/native";
+import { StackActions, useNavigation } from "@react-navigation/native";
 import SalesExecutiveItem from "../../component/SalesExecutive/SalesExecutiveItem";
 import ReactNativeCalendarStrip from "react-native-calendar-strip";
 import { APP_TIME, STORE_ID, STORE_NAME, USER_ID, USER_NAME } from "../../util/constData";
 import { UserContext } from "../../context/user/UserContext";
 import moment from "moment";
-import { getUTCDate } from "../../util/constFunctions";
+import { getUTCDate, showSnackbar } from "../../util/constFunctions";
 import { upsertBBCustomerOrder } from "../../api/Order/orderApi";
 
 type Props = {
@@ -22,7 +22,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
     const userContext = React.useContext(UserContext);
 
     const [salesExecutiveData, setSalesExecutiveData] = React.useState(null);
-    const [isSelected, setIsSelected] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(false);
     const [date, setDate] = React.useState(moment());
     const [errors, setErrors] = React.useState({
         appDate: "",
@@ -74,6 +74,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
             return false;
         }
 
+        setIsLoading(true);
         const custAddress = userContext.user.length && userContext.user[0]
 
         const orderStatusObj = [{
@@ -123,7 +124,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
             salesExecutiveName: userContext.salesEx.name,
             sales_executiveId: userContext.salesEx.id,
             appointmentDateTime: userContext.appDate,
-            // appointmentSlot: "string",
+            appointmentSlot: userContext.appTime,
             presImgFlag: false,
             storeId: STORE_ID,
             saleDate: moment(new Date()).format('YYYY-MM-DD'),
@@ -175,8 +176,11 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
             const res = await upsertBBCustomerOrder(postData);
 
             console.log("upsertBBCustomerOrder", res.data);
-
+            showSnackbar("Appointment book successfully","success");
+            navigation.dispatch(StackActions.replace("TransactionScreen"));
+            setIsLoading(false);
         } catch (err) {
+            setIsLoading(false);
             console.log('error fetchSalesExecutive : ', err);
         }
     }
@@ -244,6 +248,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
 
 
                     <Button mode="contained" style={styles.btn}
+                        loading={isLoading}
                         onPress={() => submit()}>
                         Book
                     </Button>

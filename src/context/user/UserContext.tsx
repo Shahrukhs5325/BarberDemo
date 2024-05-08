@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Auth } from 'aws-amplify';
+import moment from 'moment';
 import React from 'react';
 
 
@@ -47,7 +48,7 @@ export const UserContextProvider = ({ children }: UserContextProviderType) => {
     const [user, setUser] = React.useState<any | null>(null);
     const [cart, setCart] = React.useState<any | null>();
     const [salesEx, setsalesEx] = React.useState<any | null>();
-    const [appDate, setAppDate] = React.useState<any | null>();
+    const [appDate, setAppDate] = React.useState<any | null>(moment());
     const [appTime, setAppTime] = React.useState<any | null>();
 
 
