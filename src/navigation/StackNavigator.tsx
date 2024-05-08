@@ -8,6 +8,7 @@ import HomeScreen from "../screen/Home/HomeScreen";
 import TransactionScreen from "../screen/Transaction/TransactionScreen";
 import LoginScreen from "../screen/Auth/LoginScreen";
 import ProductScreen from "../screen/Product/ProductScreen";
+import CartScreen from "../screen/Cart/CartScreen";
 
 
 const Stack = createStackNavigator();
@@ -36,6 +37,11 @@ const StackNavigator = () => {
                 <Stack.Screen
                     name={"HomeScreen"}
                     component={RenderTabNavigation}
+                />
+
+                <Stack.Screen
+                    name={"CartScreen"}
+                    component={CartScreen}
                 />
 
                 <Stack.Screen

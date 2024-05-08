@@ -1,8 +1,9 @@
-import React from 'react';
-import { PaperProvider } from 'react-native-paper';
-import { StyleSheet } from 'react-native';
-import StackNavigator from './src/navigation/StackNavigator';
 import { Amplify } from 'aws-amplify';
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { PaperProvider } from 'react-native-paper';
+import { UserContextProvider } from './src/context/user/UserContext';
+import StackNavigator from './src/navigation/StackNavigator';
 
 
 
@@ -20,10 +21,11 @@ function App(): React.JSX.Element {
   Amplify.configure(awsProdConfig);
 
   return (
-
-    <PaperProvider>
-      <StackNavigator />
-    </PaperProvider>
+    <UserContextProvider>
+      <PaperProvider>
+        <StackNavigator />
+      </PaperProvider>
+    </UserContextProvider>
 
   );
 }

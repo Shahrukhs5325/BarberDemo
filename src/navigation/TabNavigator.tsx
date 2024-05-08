@@ -74,7 +74,7 @@ export const RenderTabNavigation = () => {
                 name={"TransactionScreen"}
                 component={TransactionScreen}
                 options={{
-                    tabBarLabel: "Transactions",
+                    tabBarLabel: "Appointments",
                     // tabBarLabelStyle: { fontWeight: "600", fontFamily: FONT.bold },
                     tabBarIcon: ({ color }) => (
                         <Image
