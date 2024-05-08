@@ -42,29 +42,23 @@ const Products = ({ categoryId }) => {
 
 
   return (
-    <View>
-      <View style={styles.container}>
-        <Text style={styles.fontsty}>Our Services</Text>
-      </View>
-
-      <View >
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item, index) => index.toString()}
-          data={productData}
-          renderItem={({ item }) =>
-            <ProductItem
-              item={item}
-            />
-          }
-          // refreshControl={
-          //     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          // }
-          // ListEmptyComponent={EmptyDataPromo}
-          style={styles.list}
-          contentContainerStyle={styles.listContents}
-        />
-      </View>
+    <View style={styles.container}>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item, index) => index.toString()}
+        data={productData}
+        renderItem={({ item }) =>
+          <ProductItem
+            item={item}
+          />
+        }
+        // refreshControl={
+        //     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        // }
+        // ListEmptyComponent={EmptyDataPromo}
+        style={styles.list}
+        contentContainerStyle={styles.listContents}
+      />
 
     </View>
   );
@@ -72,11 +66,7 @@ const Products = ({ categoryId }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 16,
-    marginTop: 10
+    marginHorizontal: 14
   },
   fontsty: {
     fontSize: 18,
