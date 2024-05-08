@@ -1,17 +1,18 @@
 import * as React from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Text } from 'react-native-paper';
+import { Badge, Text } from 'react-native-paper';
 import { STORE_NAME } from '../../util/constData';
 import { useNavigation } from '@react-navigation/native';
 
 
 interface Props {
   title?: string;
+  isIconHide?: boolean;
 
 }
 
 
-const Topbar: React.FC<Props> = ({ title }) => {
+const Topbar: React.FC<Props> = ({ title, isIconHide }) => {
   const navigation = useNavigation<any>();
 
   return (
@@ -20,14 +21,16 @@ const Topbar: React.FC<Props> = ({ title }) => {
         {/* <Text style={styles.fontsty}>Hey Nick!</Text> */}
         <Text style={styles.fontsty}>{title}</Text>
       </View>
-      <View>
+      {!isIconHide &&
         <TouchableOpacity onPress={() => navigation.navigate('CartScreen')}>
-          <Image
-            style={styles.img}
-            source={require("../../assets/cart.png")}
-          />
-        </TouchableOpacity>
-      </View>
+          <View style={{ flexDirection: 'column' }}>
+            {/* <Badge>3</Badge> */}
+            <Image
+              style={styles.img}
+              source={require("../../assets/cart.png")}
+            />
+          </View>
+        </TouchableOpacity>}
 
     </View>
   );

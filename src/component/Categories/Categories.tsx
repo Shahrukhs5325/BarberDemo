@@ -23,7 +23,7 @@ const Categories = () => {
   const fetchCategory = async () => {
     try {
       const res = await getproductlist();
-      console.log("getCategory", res?.data);
+      // console.log("getCategory", res?.data);
 
       // setCategoriesData(res?.data);
       setCategoriesData(res?.data?.lstCategories)

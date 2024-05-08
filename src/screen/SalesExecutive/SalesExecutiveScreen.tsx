@@ -4,17 +4,16 @@ import Products from "../../component/Product/Products";
 import Topbar from "../../component/TopBar/Topbar";
 
 type Props = {
-    route: any
+
 };
 
-const ProductScreen: React.FC<Props> = ({ route }) => {
+const SalesExecutiveScreen: React.FC<Props> = () => {
 
-    const { categoryId } = route.params;
 
     return (
         <View style={styles.container}>
-            <Topbar title="Our Services" />
-            <Products categoryId={categoryId} />
+            <Topbar title="Sales Executive" isIconHide={true} />
+
         </View>
     );
 }
@@ -27,4 +26,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default ProductScreen;
+export default SalesExecutiveScreen;

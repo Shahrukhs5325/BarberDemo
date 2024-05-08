@@ -42,12 +42,12 @@ export const UserContext = React.createContext({} as any)
 export const UserContextProvider = ({ children }: UserContextProviderType) => {
 
     const [user, setUser] = React.useState<any | null>(null);
-    const [cart, setCart] = React.useState<any | null>(null);
-
+    const [cart, setCart] = React.useState<any | null>();
+    const [salesEx, setsalesEx] = React.useState<any | null>();
 
 
     return (
-        <UserContext.Provider value={{ user, setUser, cart, setCart }}>
+        <UserContext.Provider value={{ user, setUser, cart, setCart, salesEx, setsalesEx }}>
             {children}
         </UserContext.Provider>
     );

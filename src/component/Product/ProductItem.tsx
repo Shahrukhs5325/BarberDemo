@@ -1,37 +1,64 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { palette } from "../../theme/palette";
+import { UserContext } from "../../context/user/UserContext";
 
 
 
 const ProductItem: React.FC<any> = ({ item }) => {
+    const userContext = React.useContext(UserContext);
 
-    const goProdScreenHandler = () => {
+    const addProdHandler = () => {
+        if (userContext.cart && userContext.cart?.some((o2) => o2.productId !== item.productId)) {
+            const arr = [...userContext.cart]
+            arr.push(item);
+            userContext.setCart(arr);
+        } else {
+            const arr = []
+            arr.push(item);
+            userContext.setCart(arr);
+        }
+    }
+
+    const removeProdHandler = () => {
+
 
     }
 
+
     return (
         <>
-            <TouchableOpacity onPress={() => goProdScreenHandler()}>
-                <View style={styles.container}>
-                    <View style={styles.imgBck}>
-                        {item?.imageUrl ?
-                            <Image
-                                source={{ uri: item?.imageUrl }}
-                                alt={item?.categoryName}
-                                style={styles.img}
-                            /> : null}
-                        <View>
-                            <Text style={styles.txtName} numberOfLines={2}>{item.productName}</Text>
-                            <Text style={styles.txtUnit} numberOfLines={1}>category</Text>
-                            <Text style={styles.txtUnit} numberOfLines={1}>{item.sellingPrice + "/" + item.unitName}</Text>
+            <View style={styles.container}>
+                <View style={styles.imgBck}>
+                    {item?.imageUrl ?
+                        <Image
+                            source={{ uri: item?.imageUrl }}
+                            alt={item?.categoryName}
+                            style={styles.img}
+                        /> : null}
+                    <View style={{ width: "80%" }}>
+                        <Text style={styles.txtName} numberOfLines={2}>{item.productName}</Text>
+                        <Text style={styles.txtUnit} numberOfLines={1}>category</Text>
+                        <Text style={styles.txtUnit} numberOfLines={1}>{item.sellingPrice + "/" + item.unitName}</Text>
 
-                        </View>
                     </View>
-
-
+                    <View style={{ width: 24 }}>
+                        {userContext.cart && userContext.cart?.some((o2) => o2.productId === item.productId) ?
+                            <TouchableOpacity onPress={() => removeProdHandler()}>
+                                <Image
+                                    style={styles.plus}
+                                    source={require("../../assets/minus.png")}
+                                />
+                            </TouchableOpacity> :
+                            <TouchableOpacity onPress={() => addProdHandler()}>
+                                <Image
+                                    style={styles.plus}
+                                    source={require("../../assets/plus.png")}
+                                />
+                            </TouchableOpacity>}
+                    </View>
                 </View>
-            </TouchableOpacity>
+            </View>
         </ >
     );
 };
@@ -69,8 +96,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         gap: 10,
         //   justifyContent: 'center',
-        //  alignItems: 'center',
+        alignItems: 'center',
     },
+    plus: {
+        width: 26,
+        height: 26,
+    }
 
 });
 

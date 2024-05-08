@@ -4,10 +4,12 @@ import { Text } from 'react-native-paper';
 import { getproductlist, getproductlistByCategory } from '../../api/Product/productApi';
 import { useNavigation } from '@react-navigation/native';
 import ProductItem from './ProductItem';
+import { UserContext } from '../../context/user/UserContext';
 
 
 const Products = ({ categoryId }) => {
   const navigation = useNavigation<any>();
+  const userContext = React.useContext(UserContext);
 
   const [productData, setProductData] = React.useState(null);
   const [categoriesData, setCategoriesData] = React.useState(null);
