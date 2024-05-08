@@ -84,7 +84,7 @@ function LoginScreen(): React.JSX.Element {
                 }
                 console.log('***** cognito user *****' + JSON.stringify(cognitoUser));
                 setIsOtp(true)
-               
+
             } catch (error) {
                 console.log('error signing in', error);
                 const msg = handleCognitoError(error);
@@ -172,6 +172,7 @@ function LoginScreen(): React.JSX.Element {
             /> */}
 
                     <Button mode="contained" style={styles.btn}
+                        loading={isLoading}
                         onPress={() => otpHandler()}>
                         Next
                     </Button>
@@ -208,6 +209,7 @@ function LoginScreen(): React.JSX.Element {
             /> */}
 
                     <Button mode="contained" style={styles.btn}
+                        loading={isLoading}
                         onPress={() => verifyHandler()}>
                         Verify
                     </Button>

@@ -1,7 +1,5 @@
 import axios from 'axios'
 import { Auth } from 'aws-amplify';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 
 
 const currentSession = async () => {
@@ -21,18 +19,16 @@ const instance = axios.create({
 // global request from all apis,
 instance.interceptors.request.use(
     async (config) => {
-        const lang = await AsyncStorage.getItem('language');
+        // config.headers.Accept = "application/json";
+        // config.headers['Content-Type'] = 'application/json';
+        const token: any = await currentSession();
 
-        config.headers.Accept = "application/json";
-        config.headers['Content-Type'] = 'application/json';
-        //  const token = await currentSession();
-
-        // if (token) {
-        //     config.headers.Authorization = `Bearer ${token?.accessToken?.jwtToken}`;
-        // }
+        if (token) {
+            config.headers.Authorization = `Bearer ${token?.idToken.jwtToken}`;
+        }
 
         // console.log("\n\n\n** url **\n",(API_URL+config?.url))
-        // console.log("\n\n\n** token **\n",(token?.accessToken?.jwtToken))
+       // console.log("\n\n\n** token **\n", (token?.accessToken?.jwtToken))
         return config;
     },
     (error) => Promise.reject(error)
