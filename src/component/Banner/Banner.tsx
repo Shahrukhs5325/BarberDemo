@@ -9,7 +9,7 @@ const Banner = () => {
     <Image
       style={styles.img}
       source={{
-        uri: 'https://www.beautifulhennacentre.com/wp-content/uploads/2021/11/inside-banner-2.jpeg',
+        uri: 'https://img.freepik.com/free-vector/realistic-barbershop-horizontal-banner-template_52683-94969.jpg?w=1800&t=st=1715182695~exp=1715183295~hmac=5505462b126803f4cd1aecee51ce3b5ce49e2cc5d17874c123886559d4b91316',
       }}
     />
   );
