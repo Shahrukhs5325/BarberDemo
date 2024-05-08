@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Auth } from 'aws-amplify';
 import React from 'react';
 
 
@@ -41,6 +42,8 @@ export const UserContext = React.createContext({} as any)
 
 export const UserContextProvider = ({ children }: UserContextProviderType) => {
 
+    const [customerId, setCustomerId] = React.useState<any | null>(null);
+
     const [user, setUser] = React.useState<any | null>(null);
     const [cart, setCart] = React.useState<any | null>();
     const [salesEx, setsalesEx] = React.useState<any | null>();
@@ -49,8 +52,25 @@ export const UserContextProvider = ({ children }: UserContextProviderType) => {
 
 
 
+    React.useEffect(() => {
+        getCustomerID();
+    }, []);
+
+
+    const getCustomerID = async () => {
+        try {
+            const data = await Auth.currentSession();
+            var userName = data.idToken.payload.phone_number.split('+')
+            setCustomerId(userName[1]);
+
+        } catch (err) {
+            console.log(err);
+            return null;
+        }
+    }
+
     return (
-        <UserContext.Provider value={{ user, setUser, cart, setCart, salesEx, setsalesEx, appDate, setAppDate, appTime, setAppTime }}>
+        <UserContext.Provider value={{ customerId, user, setUser, cart, setCart, salesEx, setsalesEx, appDate, setAppDate, appTime, setAppTime }}>
             {children}
         </UserContext.Provider>
     );
