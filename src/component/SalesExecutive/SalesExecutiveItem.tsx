@@ -27,15 +27,19 @@ const SalesExecutiveItem: React.FC<any> = ({ item }) => {
             <TouchableOpacity onPress={() => selectSalesExHAndler()}>
                 <View style={userContext.salesEx && userContext.salesEx.id === item.id ? styles.selectSingleItem : styles.singleItem}>
                     <View style={styles.imgBck}>
-                        {!item?.imageUrl ?
+                        {item?.imageUrl ?
                             <Image
+                                source={{ uri: item?.imageUrl }}
+                                alt={item?.imageUrl}
+                                style={styles.img}
+                            /> : <Image
                                 source={require("../../assets/profile.png")}
                                 //  source={{ uri: item?.imageUrl }}
                                 alt={item?.imageUrl}
                                 style={styles.img}
-                            /> : null}
+                            />}
                     </View>
-                    <Text style={styles.txt} numberOfLines={2}>hjhjbvbjh{item.name}</Text>
+                    <Text style={styles.txt} numberOfLines={2}>{item.name}</Text>
 
                 </View>
             </TouchableOpacity>
@@ -54,7 +58,6 @@ const styles = StyleSheet.create({
         width: 60,
         height: 60,
         borderRadius: 8,
-
     },
     imgBck: {
         width: 60,

@@ -44,10 +44,13 @@ export const UserContextProvider = ({ children }: UserContextProviderType) => {
     const [user, setUser] = React.useState<any | null>(null);
     const [cart, setCart] = React.useState<any | null>();
     const [salesEx, setsalesEx] = React.useState<any | null>();
+    const [appDate, setAppDate] = React.useState<any | null>();
+    const [appTime, setAppTime] = React.useState<any | null>();
+
 
 
     return (
-        <UserContext.Provider value={{ user, setUser, cart, setCart, salesEx, setsalesEx }}>
+        <UserContext.Provider value={{ user, setUser, cart, setCart, salesEx, setsalesEx, appDate, setAppDate, appTime, setAppTime }}>
             {children}
         </UserContext.Provider>
     );
