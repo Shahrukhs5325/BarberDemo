@@ -17,6 +17,13 @@ const CartScreen: React.FC<Props> = ({ }) => {
     const navigation = useNavigation<any>();
 
 
+    const totaCalculate = () => {
+        let grandTotal = 0;
+        userContext.cart.length > 0 && userContext.cart.map((item) => {
+            grandTotal = item.sellingPrice + grandTotal
+        })
+        return grandTotal;
+    }
     return (
         <>
             <Topbar title="Cart" isIconHide={true} />
@@ -39,7 +46,11 @@ const CartScreen: React.FC<Props> = ({ }) => {
                         style={styles.list}
                         contentContainerStyle={styles.listContents}
                     />
+                    <View style={{ justifyContent: 'space-between', flexDirection: "row", marginVertical: 6 }}>
+                        <Text style={styles.totTxt}>Total: </Text>
+                        <Text style={styles.totTxt}>SAR {totaCalculate()} </Text>
 
+                    </View>
                     <Button mode="contained" style={styles.btn}
                         onPress={() => navigation.navigate('SalesExecutiveScreen')}>
                         Next
@@ -69,6 +80,12 @@ const styles = StyleSheet.create({
     emtCartTxt: {
         fontSize: 16,
         fontWeight: "700",
+        color: palette.black
+    },
+    totTxt: {
+
+        fontSize: 16,
+        fontWeight: "500",
         color: palette.black
     },
     shopTxt: {
