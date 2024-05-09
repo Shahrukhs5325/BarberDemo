@@ -80,8 +80,8 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
     }
 
     const onDateSelected = (d: any) => {
-        setDate(d.format('YYYY-MM-DD'))
-        userContext.setAppDate(d.format('YYYY-MM-DD'));
+        setDate(d)
+        userContext.setAppDate(d);
         setErrors({ ...errors, appDate: "" });
     }
 
@@ -150,7 +150,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
             salesExecutiveId: userContext.salesEx.id,
             salesExecutiveName: userContext.salesEx.name,
             sales_executiveId: userContext.salesEx.id,
-            appointmentDateTime: userContext.appDate,
+            appointmentDateTime: userContext.appDate.format('YYYY-MM-DD'),
             appointmentSlot: userContext.appTime,
             presImgFlag: false,
             storeId: STORE_ID,
@@ -278,7 +278,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
                 <View style={styles.secContainer}>
                     <Text style={{ fontSize: 16, fontWeight: "600", color: '#000', }}>Name</Text>
                     <TextInput
-                        style={{ borderWidth: 1, borderColor: "#000", borderRadius: 8, marginTop: 8, paddingHorizontal: 8 }}
+                        style={{ borderWidth: 1, borderColor: "#000", borderRadius: 8, marginTop: 8, paddingHorizontal: 8 ,color:"#000"}}
                         value={name}
                         placeholder="Enter your name"
                         onChangeText={text => {
