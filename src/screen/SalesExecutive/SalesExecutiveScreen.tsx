@@ -13,6 +13,7 @@ import moment from "moment";
 import { getUTCDate, showSnackbar } from "../../util/constFunctions";
 import { upsertBBCustomerOrder } from "../../api/Order/orderApi";
 import EmptyData from "../../component/Empty/EmptyData";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type Props = {
 
@@ -38,6 +39,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
 
     React.useEffect(() => {
         fetchSalesExecutive();
+        getDataAsyncStorage();
     }, []);
 
     React.useEffect(() => {
@@ -53,6 +55,24 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
         }
     }
 
+    const storeDataAsyncStorage = async (data: any) => {
+        // store user data in AsyncStorage
+        try {
+            await AsyncStorage.setItem('name', data);
+        } catch (error) {
+            console.log("name data store ", error);
+        }
+    }
+
+    const getDataAsyncStorage = async () => {
+        // store user data in AsyncStorage
+        try {
+            const data = await AsyncStorage.getItem('name');
+            setName(data ? data : "")
+        } catch (error) {
+            console.log("name data get ", error);
+        }
+    }
 
     const selectSalesExHAndler = (item: string) => {
         userContext.setAppTime(item);
@@ -263,7 +283,8 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
                         placeholder="Enter your name"
                         onChangeText={text => {
                             setName(text)
-                            setErrors({ ...errors, name: "" });
+                            setErrors({ ...errors, name: "" })
+                            storeDataAsyncStorage(text);
                         }}
                     />
                 </View>
