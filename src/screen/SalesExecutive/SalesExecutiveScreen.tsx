@@ -280,7 +280,7 @@ const styles = StyleSheet.create({
         gap: 8
     },
     chip: {
-        width: 90,
+        width: 100,
         backgroundColor: palette.primaryLight
     },
     selChip: {
