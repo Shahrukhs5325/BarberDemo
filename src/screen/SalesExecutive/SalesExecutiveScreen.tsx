@@ -178,6 +178,8 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
 
             console.log("upsertBBCustomerOrder", res.data);
             // showSnackbar("Appointment book successfully", "success");
+            userContext.setAppTime(null);
+            userContext.setAppDate(moment());
             navigation.dispatch(StackActions.replace("SuccessScreen"));
             setIsLoading(false);
         } catch (err) {
