@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     listContents: {
         //alignItems: 'center',
         //  width: '100%',
-        paddingBottom: 150,
+        paddingBottom: 50,
     },
 
 
