@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import { FlatList, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import Topbar from "../../component/TopBar/Topbar";
 import { getSalesexecutive } from "../../api/User/userApi";
 import { Button, Chip } from "react-native-paper";
@@ -25,7 +25,10 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
     const [salesExecutiveData, setSalesExecutiveData] = React.useState(null);
     const [isLoading, setIsLoading] = React.useState(false);
     const [date, setDate] = React.useState(moment());
+    const [name, setName] = React.useState("");
+
     const [errors, setErrors] = React.useState({
+        name: "",
         appDate: "",
         appTime: "",
         salesexecutive: ""
@@ -64,7 +67,10 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
 
 
     const submit = async () => {
-        if (!userContext.salesEx) {
+        if (!name) {
+            setErrors({ ...errors, name: "Please enter name" });
+            return false;
+        } else if (!userContext.salesEx) {
             setErrors({ ...errors, salesexecutive: "Select hair specialist " });
             return false;
         } else if (!userContext.appDate) {
@@ -161,7 +167,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
             orderNo: 0,
             userName: USER_ID,
             phone: "+" + userContext.customerId,
-            name: "Shahrukh",
+            name: name,
             deliveryAddress: "",
             latitude: 24.7136,
             longitude: 46.6753,
@@ -195,6 +201,20 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
             <View style={styles.container}>
                 <Topbar title="Book Appointment" isIconHide={true} />
                 <View style={styles.secContainer}>
+                    <Text style={{ fontSize: 16, fontWeight: "600", color: '#000', }}>Name</Text>
+                    <TextInput
+                        style={{ borderWidth: 1, borderColor: "#000", borderRadius: 8, marginTop: 8, paddingHorizontal: 8 }}
+                        value={name}
+                        placeholder="Enter name"
+                        onChangeText={text => {
+                            setName(text)
+                            setErrors({ ...errors, name: "" });
+                        }}
+                    />
+                </View>
+                <View style={styles.secContainer}>
+
+
                     <Text style={{ fontSize: 16, fontWeight: "600", color: '#000' }}>Select Hair Specialist </Text>
                     <FlatList
                         horizontal={true}
@@ -250,12 +270,14 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
 
                 <View style={styles.secContainer}>
 
-                    {errors.salesexecutive ?
-                        <Text style={{ fontSize: 14, color: "red" }}>{errors.salesexecutive}</Text> :
-                        errors.appDate ?
-                            <Text style={{ fontSize: 14, color: "red" }}>{errors.appDate}</Text> :
-                            errors.appTime ?
-                                <Text style={{ fontSize: 14, color: "red" }}>{errors.appTime}</Text> : null}
+                    {errors.name ?
+                        <Text style={{ fontSize: 14, color: "red" }}>{errors.name}</Text> :
+                        errors.salesexecutive ?
+                            <Text style={{ fontSize: 14, color: "red" }}>{errors.salesexecutive}</Text> :
+                            errors.appDate ?
+                                <Text style={{ fontSize: 14, color: "red" }}>{errors.appDate}</Text> :
+                                errors.appTime ?
+                                    <Text style={{ fontSize: 14, color: "red" }}>{errors.appTime}</Text> : null}
 
 
 
