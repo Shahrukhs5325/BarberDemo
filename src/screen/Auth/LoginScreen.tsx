@@ -84,7 +84,7 @@ function LoginScreen(): React.JSX.Element {
                 }
                 console.log('***** cognito user *****' + JSON.stringify(cognitoUser));
                 setIsOtp(true)
-
+                setIsLoading(false);
             } catch (error) {
                 console.log('error signing in', error);
                 const msg = handleCognitoError(error);
@@ -179,7 +179,7 @@ function LoginScreen(): React.JSX.Element {
                 </View> :
                 <View style={styles.container}>
                     <Text style={styles.numberHeding}>OTP Verification</Text>
-                    <Text style={styles.bodyTxt}>Enter the OTP sent to 987367</Text>
+                    <Text style={styles.bodyTxt}>Enter the OTP sent to {phoneNumber}</Text>
 
                     <CodeField
                         ref={ref}
