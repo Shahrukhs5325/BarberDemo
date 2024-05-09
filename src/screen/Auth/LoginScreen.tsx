@@ -38,7 +38,7 @@ function LoginScreen(): React.JSX.Element {
     });
 
     React.useEffect(() => {
-        checkCustomerLogin();
+      //  checkCustomerLogin();
     }, []);
 
     const validate = () => {
@@ -166,12 +166,9 @@ function LoginScreen(): React.JSX.Element {
                         textInputStyle={{ height: 44, borderRadius: 6 }}
 
                     />
-                    {/* <Button
-                title="Go to HomeScreen"
-                onPress={() => navigation.navigate('HomeScreen')}
-            /> */}
+                 
 
-                    <Button mode="contained" style={styles.btn}
+                    <Button mode="contained" style={styles.btn} textColor="#FFF"
                         loading={isLoading}
                         onPress={() => otpHandler()}>
                         Next
@@ -203,12 +200,8 @@ function LoginScreen(): React.JSX.Element {
 
                     <Text style={styles.resendTxt}>Didn't receive OTP? <Text>RESEND</Text></Text>
 
-                    {/* <Button
-                title="Go to HomeScreen"
-                onPress={() => navigation.navigate('HomeScreen')}
-            /> */}
 
-                    <Button mode="contained" style={styles.btn}
+                    <Button mode="contained" style={styles.btn} textColor="#FFF"
                         loading={isLoading}
                         onPress={() => verifyHandler()}>
                         Verify
@@ -228,14 +221,16 @@ const styles = StyleSheet.create({
     numberHeding: {
         fontSize: 16,
         fontWeight: 700,
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        color:'#000'
     },
     bodyTxt: {
         fontSize: 13,
         fontWeight: 400,
         flexWrap: 'wrap',
         marginTop: 6,
-        marginBottom: 20
+        marginBottom: 20,
+     //   color:'#000'
     },
     resendTxt: {
         fontSize: 13,
@@ -247,7 +242,8 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: palette.primaryDark,
         borderRadius: 6,
-        marginTop: 50
+        marginTop: 50,
+        color:'#000'
     },
     codeFieldRoot: { marginTop: 20 },
     cell: {

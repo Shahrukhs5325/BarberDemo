@@ -247,7 +247,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
 
 
 
-                    <Button mode="contained" style={styles.btn}
+                    <Button mode="contained" style={styles.btn} textColor="#FFF"
                         loading={isLoading}
                         onPress={() => submit()}>
                         Book Appointment

@@ -63,7 +63,7 @@ const Products = ({ categoryId }) => {
         contentContainerStyle={styles.listContents}
       />
       {userContext.cart && userContext.cart.length > 0 ?
-        <Button mode="contained" style={styles.btn}
+        <Button mode="contained" style={styles.btn} textColor="#FFF"
           onPress={() => navigation.navigate('CartScreen')}>
           Cart
         </Button> : null}

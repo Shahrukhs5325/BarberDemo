@@ -30,7 +30,7 @@ const SuccessScreen: React.FC<Props> = () => {
                 />
                 <Text style={{ fontSize: 18, fontWeight: "700", color: '#000' }}>Appointment Book Successfully</Text>
 
-                <Button mode="contained" style={styles.btn}
+                <Button mode="contained" style={styles.btn} textColor="#FFF"
                     onPress={() => navigation.dispatch(StackActions.replace("HomeScreen"))}>
                     Home
                 </Button>

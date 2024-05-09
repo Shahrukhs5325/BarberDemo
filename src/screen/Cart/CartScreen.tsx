@@ -51,7 +51,7 @@ const CartScreen: React.FC<Props> = ({ }) => {
                         <Text style={styles.totTxt}>SAR {totaCalculate()} </Text>
 
                     </View>
-                    <Button mode="contained" style={styles.btn}
+                    <Button mode="contained" style={styles.btn} textColor="#FFF"
                         onPress={() => navigation.navigate('SalesExecutiveScreen')}>
                         Next
                     </Button>
