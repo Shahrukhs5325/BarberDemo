@@ -12,6 +12,7 @@ const OrderItem: React.FC<any> = ({ item }) => {
     <>
       <View style={styles.container}>
         <View>
+          <Text style={styles.txtName} numberOfLines={1}>Name : {item.name}</Text>
           <Text style={styles.txtName} numberOfLines={1}>Hair Specialist: {item.salesExecutiveName}</Text>
           <Text style={styles.txtName} numberOfLines={1}>Appointment Date: {item.appointmentDateTime}</Text>
           <Text style={styles.txtName} numberOfLines={1}>Appointment Time: {item.appointmentSlot}</Text>
@@ -46,9 +47,9 @@ const styles = StyleSheet.create({
   txtName: {
     fontSize: 14,
     flexWrap: "wrap",
-    fontWeight: "600",
+    // fontWeight: "600",
     // height: 32
-    color:'#000'
+    color: '#000'
   },
   img: {
     width: 26,

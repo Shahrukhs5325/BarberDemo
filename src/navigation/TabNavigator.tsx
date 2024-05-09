@@ -59,7 +59,7 @@ export const RenderTabNavigation = () => {
                 name={"HomeScreen"}
                 component={HomeScreen}
                 options={{
-                    tabBarLabel: "Home,",
+                    tabBarLabel: "Home",
                     //  tabBarLabelStyle: { fontWeight: "600", fontFamily: FONT.bold },
                     tabBarIcon: ({ color }) => (
                         <Image

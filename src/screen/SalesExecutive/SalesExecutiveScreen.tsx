@@ -67,10 +67,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
 
 
     const submit = async () => {
-        if (!name) {
-            setErrors({ ...errors, name: "Please enter name" });
-            return false;
-        } else if (!userContext.salesEx) {
+        if (!userContext.salesEx) {
             setErrors({ ...errors, salesexecutive: "Select hair specialist " });
             return false;
         } else if (!userContext.appDate) {
@@ -78,6 +75,9 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
             return false;
         } else if (!userContext.appTime) {
             setErrors({ ...errors, appTime: "Select appointment slot" });
+            return false;
+        } else if (!name) {
+            setErrors({ ...errors, name: "Please enter your name" });
             return false;
         }
 
@@ -200,18 +200,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.container}>
                 <Topbar title="Book Appointment" isIconHide={true} />
-                <View style={styles.secContainer}>
-                    <Text style={{ fontSize: 16, fontWeight: "600", color: '#000', }}>Name</Text>
-                    <TextInput
-                        style={{ borderWidth: 1, borderColor: "#000", borderRadius: 8, marginTop: 8, paddingHorizontal: 8 }}
-                        value={name}
-                        placeholder="Enter name"
-                        onChangeText={text => {
-                            setName(text)
-                            setErrors({ ...errors, name: "" });
-                        }}
-                    />
-                </View>
+
                 <View style={styles.secContainer}>
 
 
@@ -264,8 +253,19 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
                             ))}
                         </View>
                     </ScrollView>
+                </View>
 
-
+                <View style={styles.secContainer}>
+                    <Text style={{ fontSize: 16, fontWeight: "600", color: '#000', }}>Name</Text>
+                    <TextInput
+                        style={{ borderWidth: 1, borderColor: "#000", borderRadius: 8, marginTop: 8, paddingHorizontal: 8 }}
+                        value={name}
+                        placeholder="Enter your name"
+                        onChangeText={text => {
+                            setName(text)
+                            setErrors({ ...errors, name: "" });
+                        }}
+                    />
                 </View>
 
                 <View style={styles.secContainer}>
@@ -312,7 +312,7 @@ const styles = StyleSheet.create({
     },
     secContainer: {
         marginHorizontal: 14,
-        marginBottom: 20
+        marginBottom: 16
     },
     fontsty: {
         fontSize: 18,

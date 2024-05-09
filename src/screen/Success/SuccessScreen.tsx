@@ -28,7 +28,7 @@ const SuccessScreen: React.FC<Props> = () => {
                     style={styles.img}
                     source={require("../../assets/success.png")}
                 />
-                <Text style={{ fontSize: 18, fontWeight: "700", color: '#000' }}>Appointment Book Successfully</Text>
+                <Text style={{ fontSize: 18, fontWeight: "700", color: '#000', flexWrap: "wrap" }}>Appointment Booked Successfully</Text>
 
                 <Button mode="contained" style={styles.btn} textColor="#FFF"
                     onPress={() => navigation.dispatch(StackActions.replace("HomeScreen"))}>
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 700,
         flexWrap: 'wrap',
-        color:'#000'
+        color: '#000'
     },
     list: {
         //   paddingTop: 15,
