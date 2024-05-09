@@ -222,6 +222,14 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
                         highlightDateNameStyle={{ color: 'white' }}
                         highlightDateNumberStyle={{ color: 'white' }}
                         highlightDateContainerStyle={{ backgroundColor: palette.primaryDark }}
+
+                        daySelectionAnimation={{ type: 'background', duration: 300, highlightColor: '#FFF' }}
+                        calendarHeaderStyle={{ color: 'black' }}
+                        calendarColor={'#FFF'}
+                        dateNumberStyle={{ color: 'black' }}
+                        dateNameStyle={{ color: 'black' }}
+                        iconContainer={{ flex: 0.1 }}
+
                     />
                 </View>
                 <View style={styles.secContainer}>
@@ -284,7 +292,7 @@ const styles = StyleSheet.create({
     fontsty: {
         fontSize: 18,
         fontWeight: 700,
-        color:'#000'
+        color: '#000'
     },
     list: {
         //   paddingTop: 15,
