@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
         backgroundColor: palette.primaryLight
     },
     selChip: {
-        width: 90,
+        width: 100,
         backgroundColor: palette.primaryDark,
     },
     secContainer: {
