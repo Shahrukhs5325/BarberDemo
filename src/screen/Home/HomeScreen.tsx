@@ -6,6 +6,7 @@ import Categories from "../../component/Categories/Categories";
 import React from "react";
 import { getCustomerAddressByCustId } from "../../api/User/userApi";
 import { UserContext } from "../../context/user/UserContext";
+import SalesEx from "../../component/SalesExecutive/SalesEx";
 
 function HomeScreen(): React.JSX.Element {
     const userContext = React.useContext(UserContext);
@@ -33,7 +34,7 @@ function HomeScreen(): React.JSX.Element {
                 <MySearchbar />
                 <Banner />
                 <Categories />
-
+                <SalesEx />
             </View>
         </ScrollView>
     );
@@ -45,7 +46,6 @@ const styles = StyleSheet.create({
         margin: 15,
         gap: 14
     },
-
 });
 
 export default HomeScreen;
