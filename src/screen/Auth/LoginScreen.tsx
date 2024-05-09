@@ -38,7 +38,7 @@ function LoginScreen(): React.JSX.Element {
     });
 
     React.useEffect(() => {
-      //  checkCustomerLogin();
+        checkCustomerLogin();
     }, []);
 
     const validate = () => {
@@ -166,7 +166,7 @@ function LoginScreen(): React.JSX.Element {
                         textInputStyle={{ height: 44, borderRadius: 6 }}
 
                     />
-                 
+
 
                     <Button mode="contained" style={styles.btn} textColor="#FFF"
                         loading={isLoading}
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 700,
         flexWrap: 'wrap',
-        color:'#000'
+        color: '#000'
     },
     bodyTxt: {
         fontSize: 13,
@@ -230,20 +230,22 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         marginTop: 6,
         marginBottom: 20,
-     //   color:'#000'
+        color: '#000'
+        //   color:'#000'
     },
     resendTxt: {
         fontSize: 13,
         fontWeight: 400,
         flexWrap: 'wrap',
         marginTop: 16,
+        color: '#000'
     },
     btn: {
         width: '100%',
         backgroundColor: palette.primaryDark,
         borderRadius: 6,
         marginTop: 50,
-        color:'#000'
+        color: '#000'
     },
     codeFieldRoot: { marginTop: 20 },
     cell: {

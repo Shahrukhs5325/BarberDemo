@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         flexWrap: "wrap",
         // height: 30,
+        color:'#000'
     },
     selectTxt: {
         fontSize: 12,

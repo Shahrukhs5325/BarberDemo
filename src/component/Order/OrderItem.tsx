@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     fontWeight: "600",
     // height: 32
+    color:'#000'
   },
   img: {
     width: 26,

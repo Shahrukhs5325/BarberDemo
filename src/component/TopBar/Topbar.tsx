@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
   fontsty: {
     fontSize: 20,
     fontWeight: 700,
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    color:'#000'
   },
   img: {
     width: 24,

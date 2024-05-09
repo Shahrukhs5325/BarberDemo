@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         fontSize: 12,
         textAlign: 'center',
         flexWrap: "wrap",
+        color:'#000'
     },
     img: {
         width: 60,

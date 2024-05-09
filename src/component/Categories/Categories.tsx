@@ -72,7 +72,8 @@ const styles = StyleSheet.create({
   fontsty: {
     fontSize: 16,
     fontWeight: 700,
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    color:'#000'
   },
   viewAll: {
     fontSize: 14,

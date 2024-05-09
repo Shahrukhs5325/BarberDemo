@@ -79,7 +79,8 @@ const styles = StyleSheet.create({
   fontsty: {
     fontSize: 18,
     fontWeight: 700,
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    color:'#000'
   },
   list: {
     //   paddingTop: 15,

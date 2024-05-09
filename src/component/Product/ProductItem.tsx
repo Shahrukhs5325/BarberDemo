@@ -80,12 +80,13 @@ const styles = StyleSheet.create({
         fontSize: 14,
         flexWrap: "wrap",
         fontWeight: "600",
-        height: 36
+        height: 36,
+        color:'#000'
     },
     txtUnit: {
         fontSize: 14,
         flexWrap: "wrap",
-
+        color:'#000'
     },
     img: {
         width: 70,
