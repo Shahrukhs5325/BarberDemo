@@ -177,7 +177,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
 
             console.log("upsertBBCustomerOrder", res.data);
             showSnackbar("Appointment book successfully", "success");
-            navigation.dispatch(StackActions.replace("TransactionScreen"));
+            navigation.dispatch(StackActions.replace("SuccessScreen"));
             setIsLoading(false);
         } catch (err) {
             setIsLoading(false);

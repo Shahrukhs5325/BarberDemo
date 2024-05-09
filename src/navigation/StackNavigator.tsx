@@ -8,6 +8,7 @@ import ProductScreen from "../screen/Product/ProductScreen";
 import CartScreen from "../screen/Cart/CartScreen";
 import SalesExecutiveScreen from "../screen/SalesExecutive/SalesExecutiveScreen";
 import OrderScreen from "../screen/Transaction/OrderScreen";
+import SuccessScreen from "../screen/Success/SuccessScreen";
 
 
 const Stack = createStackNavigator();
@@ -46,6 +47,11 @@ const StackNavigator = () => {
                 <Stack.Screen
                     name={"SalesExecutiveScreen"}
                     component={SalesExecutiveScreen}
+                />
+
+                <Stack.Screen
+                    name={"SuccessScreen"}
+                    component={SuccessScreen}
                 />
 
                 <Stack.Screen
