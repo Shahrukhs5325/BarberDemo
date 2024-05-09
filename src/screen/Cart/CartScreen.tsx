@@ -7,6 +7,7 @@ import Topbar from "../../component/TopBar/Topbar";
 import ProductItem from "../../component/Product/ProductItem";
 import { Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+import EmptyData from "../../component/Empty/EmptyData";
 
 type Props = {
     route: any
@@ -42,7 +43,7 @@ const CartScreen: React.FC<Props> = ({ }) => {
                         // refreshControl={
                         //     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                         // }
-                        // ListEmptyComponent={EmptyDataPromo}
+                        ListEmptyComponent={EmptyData}
                         style={styles.list}
                         contentContainerStyle={styles.listContents}
                     />

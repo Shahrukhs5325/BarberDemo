@@ -12,6 +12,7 @@ import { UserContext } from "../../context/user/UserContext";
 import moment from "moment";
 import { getUTCDate, showSnackbar } from "../../util/constFunctions";
 import { upsertBBCustomerOrder } from "../../api/Order/orderApi";
+import EmptyData from "../../component/Empty/EmptyData";
 
 type Props = {
 
@@ -205,7 +206,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
                         // refreshControl={
                         //     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                         // }
-                        // ListEmptyComponent={EmptyDataPromo}
+                        ListEmptyComponent={EmptyData}
                         style={styles.list}
                         contentContainerStyle={styles.listContents}
                     />

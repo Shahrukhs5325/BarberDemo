@@ -5,6 +5,7 @@ import { getproductlist, getproductlistByCategory } from '../../api/Product/prod
 import { useNavigation } from '@react-navigation/native';
 import ProductItem from './ProductItem';
 import { UserContext } from '../../context/user/UserContext';
+import EmptyData from '../Empty/EmptyData';
 
 
 const Products = ({ categoryId }) => {
@@ -57,7 +58,7 @@ const Products = ({ categoryId }) => {
         // refreshControl={
         //     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         // }
-        // ListEmptyComponent={EmptyDataPromo}
+        ListEmptyComponent={EmptyData}
         style={styles.list}
         contentContainerStyle={styles.listContents}
       />

@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import ProductItem from './ProductItem';
 import { UserContext } from '../../context/user/UserContext';
 import { palette } from '../../theme/palette';
+import EmptyData from '../Empty/EmptyData';
 
 
 const Products = ({ categoryId }) => {
@@ -58,14 +59,14 @@ const Products = ({ categoryId }) => {
         // refreshControl={
         //     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         // }
-        // ListEmptyComponent={EmptyDataPromo}
+         ListEmptyComponent={EmptyData}
         style={styles.list}
         contentContainerStyle={styles.listContents}
       />
       {userContext.cart && userContext.cart.length > 0 ?
         <Button mode="contained" style={styles.btn} textColor="#FFF"
           onPress={() => navigation.navigate('CartScreen')}>
-          Cart
+          Go To Cart
         </Button> : null}
     </View>
   );

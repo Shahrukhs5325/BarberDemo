@@ -5,6 +5,7 @@ import React from "react";
 import { allCustomerOrdersByCustomerId } from "../../api/Order/orderApi";
 import { UserContext } from "../../context/user/UserContext";
 import OrderItem from "../../component/Order/OrderItem";
+import EmptyData from "../../component/Empty/EmptyData";
 
 
 
@@ -29,7 +30,7 @@ const OrderScreen: React.FC<Props> = ({ route }) => {
     const fetchCustomerOrders = async () => {
         try {
             const res = await allCustomerOrdersByCustomerId(userContext.customerId, type === "pending" ? "pending" : "In-Progress");
- 
+
             setOrderData(res?.data.orderList);
         } catch (err) {
             console.log('error fetchCustomerOrders : ', err);
@@ -51,7 +52,7 @@ const OrderScreen: React.FC<Props> = ({ route }) => {
                     // refreshControl={
                     //     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                     // }
-                    // ListEmptyComponent={EmptyDataPromo}
+                    ListEmptyComponent={EmptyData}
                     style={styles.list}
                     contentContainerStyle={styles.listContents}
                 />
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 700,
         flexWrap: 'wrap',
-        color:'#000'
+        color: '#000'
     },
     list: {
         //   paddingTop: 15,
