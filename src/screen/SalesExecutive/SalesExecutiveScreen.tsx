@@ -160,7 +160,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
             orderNo: 0,
             userName: USER_ID,
             phone: "+" + userContext.customerId,
-            name: "Customer ABC",
+            name: "Shahrukh",
             deliveryAddress: "",
             latitude: 24.7136,
             longitude: 46.6753,

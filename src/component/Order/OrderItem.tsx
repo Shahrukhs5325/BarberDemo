@@ -15,7 +15,7 @@ const OrderItem: React.FC<any> = ({ item }) => {
           <Text style={styles.txtName} numberOfLines={1}>Hair Specialist: {item.salesExecutiveName}</Text>
           <Text style={styles.txtName} numberOfLines={1}>Appointment Date: {item.appointmentDateTime}</Text>
           <Text style={styles.txtName} numberOfLines={1}>Appointment Time: {item.appointmentSlot}</Text>
-          <Text style={styles.txtName} numberOfLines={1}>Status: {item.status}</Text>
+          <Text style={styles.txtName} numberOfLines={1}>Status: {item.status === "In-Progress" ? "Completed" : item.status}</Text>
         </View>
         <View>
           <TouchableOpacity onPress={() => openAddressOnMap()}>
