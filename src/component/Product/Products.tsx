@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 import { getproductlist, getproductlistByCategory } from '../../api/Product/productApi';
 import { useNavigation } from '@react-navigation/native';
@@ -15,6 +15,7 @@ const Products = ({ categoryId }) => {
 
   const [productData, setProductData] = React.useState(null);
   const [categoriesData, setCategoriesData] = React.useState(null);
+  const [refreshing, setRefreshing] = React.useState(false);
 
   React.useEffect(() => {
     categoryId ? fetchProductlistByCategory() : fetchProductList();
@@ -36,12 +37,17 @@ const Products = ({ categoryId }) => {
     try {
       const res = await getproductlistByCategory(categoryId);
       //  console.log("fetchProductList", res?.data.lstProductSearch);
-
       setProductData(res?.data?.lstProductSearch);
       // setCategoriesData(res?.data?.lstCategories)
     } catch (err) {
       console.log('error fetchProductList : ', err);
     }
+  }
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    categoryId ? fetchProductlistByCategory() : fetchProductList();
+    setRefreshing(false);
   }
 
 
@@ -56,10 +62,10 @@ const Products = ({ categoryId }) => {
             item={item}
           />
         }
-        // refreshControl={
-        //     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        // }
-         ListEmptyComponent={EmptyData}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+        ListEmptyComponent={EmptyData}
         style={styles.list}
         contentContainerStyle={styles.listContents}
       />
@@ -81,7 +87,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 700,
     flexWrap: 'wrap',
-    color:'#000'
+    color: '#000'
   },
   list: {
     //   paddingTop: 15,

@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, RefreshControl, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import React from "react";
@@ -22,6 +22,7 @@ const OrderScreen: React.FC<Props> = ({ route }) => {
     const userContext = React.useContext(UserContext);
 
     const [orderData, setOrderData] = React.useState(null);
+    const [refreshing, setRefreshing] = React.useState(false);
 
     React.useEffect(() => {
         fetchCustomerOrders();
@@ -37,6 +38,13 @@ const OrderScreen: React.FC<Props> = ({ route }) => {
         }
     }
 
+    const onRefresh = () => {
+        setRefreshing(true);
+        fetchCustomerOrders();
+        setRefreshing(false);
+    }
+
+
     return (
         <>
             <View style={styles.container}>
@@ -49,9 +57,9 @@ const OrderScreen: React.FC<Props> = ({ route }) => {
                             item={item}
                         />
                     }
-                    // refreshControl={
-                    //     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-                    // }
+                    refreshControl={
+                        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                    }
                     ListEmptyComponent={EmptyData}
                     style={styles.list}
                     contentContainerStyle={styles.listContents}
