@@ -16,8 +16,14 @@ export const allCustomerOrdersByCustomerId = async (id: any, type: string) => {
         console.log(err);
         return null;
     }
-    
+
     const response = await instance.get(`customerflow/allCustomerOrdersByCustomerIdwithName?customerId=${userName[1]}&orderStatus=${type}`);
     return response;
 };
 
+export const getCustomerOrderDetails = async (item: any) => {
+
+    const response = await instance.get(`onlineOrder/customers/getCustomerOrderDetails/${item.storeId}/${item.orderId}`);
+
+    return response;
+};

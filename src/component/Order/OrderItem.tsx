@@ -2,11 +2,17 @@ import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { palette } from "../../theme/palette";
 import { openAddressOnMap } from "../../util/constFunctions";
+import { useNavigation } from "@react-navigation/native";
 
 
 
 const OrderItem: React.FC<any> = ({ item }) => {
+  const navigation = useNavigation<any>();
 
+
+  const detailsScrHandler = () => {
+    navigation.navigate('OrderDetailsScreen', { item: item })
+  }
 
   return (
     <>
@@ -18,7 +24,13 @@ const OrderItem: React.FC<any> = ({ item }) => {
           <Text style={styles.txtName} numberOfLines={1}>Appointment Time: {item.appointmentSlot}</Text>
           <Text style={styles.txtName} numberOfLines={1}>Status: {item.status === "In-Progress" ? "Completed" : item.status}</Text>
         </View>
-        <View>
+        <View style={{ gap: 16 }}>
+          <TouchableOpacity onPress={() => detailsScrHandler()}>
+            <Image
+              style={styles.img}
+              source={require("../../assets/view.png")}
+            />
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => openAddressOnMap()}>
             <Image
               style={styles.img}
