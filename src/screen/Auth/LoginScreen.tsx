@@ -152,15 +152,15 @@ function LoginScreen(): React.JSX.Element {
                         ref={phoneInput}
                         defaultValue={phoneNumber}
                         placeholder="Enter phone number"
-                        defaultCode={"IN"}
+                        defaultCode={"SA"}
                         layout="second"
                         onChangeFormattedText={(value) => {
                             setPhoneNumber(value);
 
                         }}
-                        countryPickerProps={{
-                            countryCodes: DEFAULT_COUNTRY_CODE_PHONE
-                        }}
+                        // countryPickerProps={{
+                        //     countryCodes: DEFAULT_COUNTRY_CODE_PHONE
+                        // }}
                         containerStyle={{ height: 46, width: '100%', borderColor: "#000", borderWidth: 0.6, borderRadius: 6 }}
                         textContainerStyle={{ height: 44, backgroundColor: "#FFF", borderRadius: 6 }}
                         textInputStyle={{ height: 44, borderRadius: 6 }}
