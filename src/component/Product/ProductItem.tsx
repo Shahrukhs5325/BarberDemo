@@ -36,7 +36,11 @@ const ProductItem: React.FC<any> = ({ item, isHide = false }) => {
                             source={{ uri: item?.imageUrl }}
                             alt={item?.categoryName}
                             style={styles.img}
-                        /> : null}
+                        /> : <Image
+                            source={{ uri: "https://ezygen-app-images.s3.ap-south-1.amazonaws.com/171507618808070783_1715076186008" }}
+                            alt={item?.categoryName}
+                            style={styles.img}
+                        />}
                     <View style={{ width: "80%" }}>
                         <Text style={styles.txtName} numberOfLines={2}>{item.productName}</Text>
                         <Text style={styles.txtUnit} numberOfLines={1}>{item.maxRetailPrice} mins</Text>
