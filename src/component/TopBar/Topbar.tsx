@@ -17,8 +17,13 @@ const Topbar: React.FC<Props> = ({ title, isIconHide }) => {
 
   return (
     <View style={styles.container}>
-      <View>
-        {/* <Text style={styles.fontsty}>Hey Nick!</Text> */}
+      <View style={{ flexDirection: 'row', alignItems: "center", gap: 8 }}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image
+            style={styles.imgBack}
+            source={require("../../assets/back.png")}
+          />
+        </TouchableOpacity>
         <Text style={styles.fontsty}>{title}</Text>
       </View>
       {!isIconHide &&
@@ -48,12 +53,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 700,
     flexWrap: 'wrap',
-    color:'#000'
+    color: '#000'
   },
   img: {
     width: 24,
     height: 24
   },
+  imgBack: {
+    width: 22,
+    height: 22
+  }
 
 });
 
