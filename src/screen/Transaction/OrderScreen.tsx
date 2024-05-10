@@ -6,6 +6,7 @@ import { allCustomerOrdersByCustomerId } from "../../api/Order/orderApi";
 import { UserContext } from "../../context/user/UserContext";
 import OrderItem from "../../component/Order/OrderItem";
 import EmptyData from "../../component/Empty/EmptyData";
+import { useIsFocused } from "@react-navigation/native";
 
 
 
@@ -19,6 +20,7 @@ interface Props {
 
 const OrderScreen: React.FC<Props> = ({ route }) => {
     const { type } = route.params;
+    const focus = useIsFocused();
     const userContext = React.useContext(UserContext);
 
     const [orderData, setOrderData] = React.useState(null);
@@ -26,7 +28,8 @@ const OrderScreen: React.FC<Props> = ({ route }) => {
 
     React.useEffect(() => {
         fetchCustomerOrders();
-    }, [type]);
+    }, [type, focus]);
+
 
     const fetchCustomerOrders = async () => {
         try {

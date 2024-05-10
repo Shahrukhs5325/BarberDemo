@@ -14,6 +14,7 @@ import { getUTCDate, showSnackbar } from "../../util/constFunctions";
 import { upsertBBCustomerOrder } from "../../api/Order/orderApi";
 import EmptyData from "../../component/Empty/EmptyData";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Auth } from "aws-amplify";
 
 type Props = {
 
@@ -27,6 +28,8 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
     const [isLoading, setIsLoading] = React.useState(false);
     const [date, setDate] = React.useState(moment());
     const [name, setName] = React.useState("");
+    const [custID, setCustID] = React.useState(null);
+
 
     const [errors, setErrors] = React.useState({
         name: "",
@@ -40,7 +43,20 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
     React.useEffect(() => {
         fetchSalesExecutive();
         getDataAsyncStorage();
+        getCustId();
+        
     }, []);
+
+    const getCustId= async()=>{
+        try {
+            const data = await Auth.currentSession();
+            var userName = data.idToken.payload.phone_number.split('+')
+            setCustID(userName[1]);
+        } catch (err) {
+            console.log(err);
+            return null;
+        }
+    }
 
     React.useEffect(() => {
         setErrors({ ...errors, salesexecutive: "" });
@@ -107,7 +123,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
         const orderStatusObj = [{
             "comments": "",
             "created_at": "",
-            "customerId": userContext.customerId,
+            "customerId": custID,
             "statusId": "1",
             "stausName": "Pending",
             "userName": USER_ID,
@@ -161,7 +177,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
             country: custAddress.country ? custAddress.country : "",
             created_at: "",
             currencyName: "SAR",
-            customerId: userContext.customerId,
+            customerId: custID,
             dateReport: "2020-06-07T07:46:24.924Z",
             deliveryDate: "2020-06-10",
             discount: 0,
@@ -186,7 +202,7 @@ const SalesExecutiveScreen: React.FC<Props> = () => {
             updatedBy: "ABC",
             orderNo: 0,
             userName: USER_ID,
-            phone: "+" + userContext.customerId,
+            phone: "+" + custID,
             name: name,
             deliveryAddress: "",
             latitude: 24.7136,
