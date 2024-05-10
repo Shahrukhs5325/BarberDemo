@@ -25,6 +25,7 @@ const CartScreen: React.FC<Props> = ({ }) => {
         })
         return grandTotal;
     }
+
     return (
         <>
             <Topbar title="Cart" isIconHide={true} />

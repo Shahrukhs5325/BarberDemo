@@ -5,7 +5,7 @@ import { UserContext } from "../../context/user/UserContext";
 
 
 
-const ProductItem: React.FC<any> = ({ item }) => {
+const ProductItem: React.FC<any> = ({ item, isHide = false }) => {
     const userContext = React.useContext(UserContext);
 
     const addProdHandler = () => {
@@ -43,21 +43,22 @@ const ProductItem: React.FC<any> = ({ item }) => {
                         <Text style={styles.txtUnit} numberOfLines={1}>{"SAR " + item.sellingPrice}</Text>
 
                     </View>
-                    <View style={{ width: 24 }}>
-                        {userContext.cart && userContext.cart?.some((o2) => o2.productId === item.productId) ?
-                            <TouchableOpacity onPress={() => removeProdHandler()}>
-                                <Image
-                                    style={styles.plus}
-                                    source={require("../../assets/minus.png")}
-                                />
-                            </TouchableOpacity> :
-                            <TouchableOpacity onPress={() => addProdHandler()}>
-                                <Image
-                                    style={styles.plus}
-                                    source={require("../../assets/plus.png")}
-                                />
-                            </TouchableOpacity>}
-                    </View>
+                    {!isHide ?
+                        <View style={{ width: 24 }}>
+                            {userContext.cart && userContext.cart?.some((o2) => o2.productId === item.productId) ?
+                                <TouchableOpacity onPress={() => removeProdHandler()}>
+                                    <Image
+                                        style={styles.plus}
+                                        source={require("../../assets/minus.png")}
+                                    />
+                                </TouchableOpacity> :
+                                <TouchableOpacity onPress={() => addProdHandler()}>
+                                    <Image
+                                        style={styles.plus}
+                                        source={require("../../assets/plus.png")}
+                                    />
+                                </TouchableOpacity>}
+                        </View> : null}
                 </View>
             </View>
         </ >
@@ -81,12 +82,12 @@ const styles = StyleSheet.create({
         flexWrap: "wrap",
         fontWeight: "600",
         height: 36,
-        color:'#000'
+        color: '#000'
     },
     txtUnit: {
         fontSize: 14,
         flexWrap: "wrap",
-        color:'#000'
+        color: '#000'
     },
     img: {
         width: 70,
